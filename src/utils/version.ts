@@ -1,7 +1,7 @@
 import { CINNABAR_PROJECT_VERSION } from "../cinnabar.js";
 
 const version =
-  CINNABAR_PROJECT_VERSION + (process.env.ANCA_BUILD_PREFIX || "");
+  CINNABAR_PROJECT_VERSION + (process.env.SNAPCRUD_BUILD_PREFIX || "");
 
 /**
  *

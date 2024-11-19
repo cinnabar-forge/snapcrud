@@ -43,7 +43,7 @@ const OUT_WEB_FOLDER = IS_NPM_BUNDLE ? "dist/assets" : "build/bundle/assets";
 const nodeModules = IS_NPM_BUNDLE ? getNodeModules() : [];
 
 const myVars = {
-  'process.env.ANCA_BUILD_PREFIX': markBuild(),
+  'process.env.SNAPCRUD_BUILD_PREFIX': markBuild(),
 }
 
 const buildOptions = {

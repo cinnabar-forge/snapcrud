@@ -2,7 +2,11 @@
   "name": "snapcrud",
   "version": "0.0.0",
   "license": "ISC",
+  "bin": {
+    "snapcrud": "./bin/snapcrud.js"
+  },
   "files": [
+    "bin",
     "dist"
   ],
   "type": "module",
