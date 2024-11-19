@@ -56,8 +56,8 @@ export async function getTableEntity(
         .filter((column) => tableColumns.includes(column))
         .map((column) => {
           return `<div>
-            <label for="${column}">${column}</label>
-            <input type="text" id="${column}" name="${column}" value="${entity[column]}" ${primaryKeys.includes(column) ? "disabled" : ""}></div>
+            <p><label for="${column}">${column}</label></p>
+            <input type="text" id="${column}" name="${column}" value="${entity[column]}" autocomplete="off" ${primaryKeys.includes(column) ? "disabled" : ""}></div>
           `;
         })
         .join("")}

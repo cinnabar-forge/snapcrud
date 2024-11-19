@@ -54,6 +54,7 @@ export async function getTableEntities(
       <thead>
         <tr>
           ${visibleColumns.map((key) => `<th>${key}</th>`).join("")}
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

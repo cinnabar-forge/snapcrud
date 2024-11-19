@@ -15,6 +15,7 @@ export function getHtmlPageTemplate(title: string, bodyMarkup: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title} - SnapCRUD</title>
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
   <div><h1>${title}</h1></div>

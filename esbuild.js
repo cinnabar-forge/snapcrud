@@ -38,6 +38,7 @@ const ARGUMENTS = process.argv[3] || "";
 
 const ESBUILD_NAME = IS_NPM_BUNDLE ? "NPM Bundle" : "Full Bundle";
 const OUT_FILE = IS_NPM_BUNDLE ? "dist/index.js" : "build/bundle/index.js";
+const OUT_WEB_FOLDER = IS_NPM_BUNDLE ? "dist/assets" : "build/bundle/assets";
 
 const nodeModules = IS_NPM_BUNDLE ? getNodeModules() : [];
 
@@ -53,6 +54,14 @@ const buildOptions = {
   format: IS_NPM_BUNDLE ? "esm" : "cjs",
   outfile: OUT_FILE,
   platform: "node",
+};
+
+const buildWebOptions = {
+  bundle: true,
+  define: myVars,
+  entryPoints: ["src-web/style.css"],
+  minify: true,
+  outdir: OUT_WEB_FOLDER,
 };
 
 let childProcess = null;
@@ -111,4 +120,14 @@ if (IS_WATCH_MODE) {
       console.error(`Error building ${ESBUILD_NAME}: ${e.message}`);
       process.exit(1);
     });
+
+  build(buildWebOptions)
+    .then(() => {
+      console.log(`${ESBUILD_NAME} Web has been built to ${OUT_WEB_FOLDER}`);
+    })
+    .catch((e) => {
+      console.error(`Error building ${ESBUILD_NAME} Web: ${e.message}`);
+      process.exit(1);
+    });
+    
 }
