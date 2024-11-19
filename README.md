@@ -4,6 +4,12 @@
 
 ## Installation
 
+### npm
+
+```bash
+npm install snapcrud
+```
+
 ## Contributing
 
 Visit [`CONTRIBUTING.md`](CONTRIBUTING.md).

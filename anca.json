@@ -11,6 +11,7 @@
     "text": "SnapCRUD",
     "npmPackage": "snapcrud"
   },
+  "public": true,
   "type": "api",
   "stack": "nodejs"
 }
