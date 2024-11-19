@@ -49,7 +49,7 @@ export async function getTableEntities(
   <div>
     <p><a href="/">Back to tables</a></p>
   </div>
-  <div>
+  <div class="chonk">
     <table>
       <thead>
         <tr>
