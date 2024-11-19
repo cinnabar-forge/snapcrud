@@ -1,0 +1,16 @@
+{
+  "development": {
+    "nodejsOpenapi": {
+      "modelsLocation": "./src/types/openapi.ts",
+      "modelsModule": "../types/openapi.js",
+      "modelsLocationType": "file"
+    },
+    "readme": {}
+  },
+  "namings": {
+    "text": "SnapCRUD",
+    "npmPackage": "snapcrud"
+  },
+  "type": "api",
+  "stack": "nodejs"
+}

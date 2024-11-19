@@ -1,0 +1,45 @@
+{
+  "name": "snapcrud",
+  "version": "0.0.0",
+  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node esbuild.js",
+    "build:bundle": "node esbuild.js full",
+    "build:dev": "tsc",
+    "dev": "node esbuild.js watch",
+    "fix": "prettier . --write && eslint --fix .",
+    "format": "prettier . --write",
+    "lint": "eslint --fix .",
+    "prepack": "npm run build",
+    "start": "node dist/index.js",
+    "test": "prettier . -c && eslint --max-warnings 0 . && tsc"
+  },
+  "dependencies": {
+    "@cinnabar-forge/utils": "0.2.0",
+    "clivo": "0.5.2",
+    "dotenv": "16.4.5",
+    "express": "4.21.1",
+    "helmet": "8.0.0",
+    "knex": "3.1.0",
+    "mysql2": "3.11.4",
+    "winston": "3.17.0"
+  },
+  "devDependencies": {
+    "@cinnabar-forge/eslint-plugin": "0.7.3",
+    "@cinnabar-forge/meta": "0.3.1",
+    "@types/express": "5.0.0",
+    "esbuild": "0.24.0",
+    "typescript": "5.6.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "pre-commit": [
+    "test"
+  ]
+}
