@@ -38,7 +38,10 @@ export async function getConfig(): Promise<Config> {
   try {
     config = JSON.parse(await fs.readFile(configPath, "utf8"));
     if (config == null) {
-      config = [];
+      config = { tables: [] };
+    }
+    if (config.tables == null) {
+      config.tables = [];
     }
   } catch {
     throw new Error("can't open config file " + configPath);
@@ -47,7 +50,7 @@ export async function getConfig(): Promise<Config> {
   try {
     tables = [];
     tableColumns = {};
-    for (const table of config) {
+    for (const table of config.tables) {
       tables.push(table.name);
       tableColumns[table.name] = [];
       if (table.visibleColumns) {

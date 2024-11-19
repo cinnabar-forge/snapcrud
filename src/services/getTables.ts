@@ -10,7 +10,7 @@ export async function getTables(): Promise<string> {
 
   const tablesHtml = (
     await Promise.all(
-      config.map(async (tableConfig) => {
+      config.tables.map(async (tableConfig) => {
         const tableColumns = await tableCheck(tableConfig.name);
         return `<a href="/tables/${tableConfig.name}">${tableConfig.name}</a> (${tableColumns.join(", ")})`;
       }),
