@@ -1,5 +1,5 @@
 export interface Config {
-  displayAllTables?: boolean,
+  displayAllTables?: boolean;
   tables?: {
     displayAllColumns?: boolean;
     editableColumns?: string[];

@@ -39,7 +39,7 @@ export async function getConfig(): Promise<Config> {
   try {
     config = JSON.parse(await fs.readFile(configPath, "utf8"));
     if (config == null) {
-      config = { };
+      config = {};
     }
     if (config.tables == null) {
       config.tables = [];

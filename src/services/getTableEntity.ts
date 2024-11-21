@@ -58,6 +58,7 @@ export async function getTableEntity(
           const columnType = columns.find((c) => c.Field === column)?.Type;
           let inputType = "text";
           let inputAttributes = "";
+          let inputElement = "";
 
           let columnValue = entity[column];
 
@@ -78,11 +79,8 @@ export async function getTableEntity(
             }
             inputType = "datetime-local";
             inputAttributes = `value="${columnValue}"`;
-            return `
-              <div>
-                <p><label for="${column}">${column}</label></p>
-                <input type="${inputType}" id="${column}" name="${column}" ${inputAttributes} ${primaryKeys.includes(column) ? "disabled" : ""}>
-              </div>
+            inputElement = `
+              <input type="${inputType}" id="${column}" name="${column}" ${inputAttributes} ${primaryKeys.includes(column) ? "disabled" : ""}>
             `;
           } else if (columnType.includes("enum")) {
             const enumValues = columnType
@@ -90,27 +88,28 @@ export async function getTableEntity(
               .replace(")", "")
               .split(",");
             inputAttributes = `value="${entity[column]}"`;
-            return `
-              <div>
-                <p><label for="${column}">${column}</label></p>
-                <select id="${column}" name="${column}" ${primaryKeys.includes(column) ? "disabled" : ""}>
-                  ${enumValues.map((value) => `<option value="${value}" ${entity[column] === value ? "selected" : ""}>${value}</option>`).join("")}
-                </select>
-              </div>
+            inputElement = `
+              <select id="${column}" name="${column}" ${primaryKeys.includes(column) ? "disabled" : ""}>
+                ${enumValues.map((value) => `<option value="${value}" ${entity[column] === value ? "selected" : ""}>${value}</option>`).join("")}
+              </select>
             `;
           } else if (columnType.includes("bool")) {
             inputType = "checkbox";
             inputAttributes = `value="${entity[column]}" ${entity[column] === 1 ? "checked" : ""}`;
+          } else {
+            inputElement = `
+              <input type="${inputType}" id="${column}" name="${column}" value="${columnValue}" autocomplete="off" ${primaryKeys.includes(column) ? "disabled" : ""} ${inputAttributes}>
+            `;
           }
 
           return `
             <div>
               <p><label for="${column}">${column}</label></p>
-              <input type="${inputType}" id="${column}" name="${column}" value="${columnValue}" autocomplete="off" ${primaryKeys.includes(column) ? "disabled" : ""} ${inputAttributes}>
+              ${inputElement}
             </div>
           `;
         })
-        .join("")}
+        .join("")}    
       <button type="submit">Save</button>
     </form>
   </div>
