@@ -1,6 +1,6 @@
 import knex from "../config/database.js";
 import { GetTableEntityParams, GetTableEntityQuery } from "../types/openapi.js";
-import { generateTypes, tableCheck } from "../utils/db.js";
+import { getColumns, tableCheck } from "../utils/db.js";
 import { getHtmlPageTemplate } from "../utils/html.js";
 
 /**
@@ -16,7 +16,7 @@ export async function getTableEntity(
 
   const tableColumns = await tableCheck(tableName);
 
-  const columns = await generateTypes(knex, tableName || "table");
+  const columns = await getColumns(knex, tableName || "table");
 
   if (!columns) {
     throw new Error("no such columns");
@@ -55,9 +55,59 @@ export async function getTableEntity(
       ${visibleColumns
         .filter((column) => tableColumns.includes(column))
         .map((column) => {
-          return `<div>
-            <p><label for="${column}">${column}</label></p>
-            <input type="text" id="${column}" name="${column}" value="${entity[column]}" autocomplete="off" ${primaryKeys.includes(column) ? "disabled" : ""}></div>
+          const columnType = columns.find((c) => c.Field === column)?.Type;
+          let inputType = "text";
+          let inputAttributes = "";
+
+          let columnValue = entity[column];
+
+          if (columnType == null) {
+            inputType = "text";
+          } else if (
+            columnType.includes("int") ||
+            columnType.includes("tinyint")
+          ) {
+            inputType = "number";
+          } else if (
+            columnType.includes("datetime") ||
+            columnType.includes("timestamp")
+          ) {
+            const date = columnValue as Date;
+            if (date && date.toISOString) {
+              columnValue = date.toISOString().slice(0, 16);
+            }
+            inputType = "datetime-local";
+            inputAttributes = `value="${columnValue}"`;
+            return `
+              <div>
+                <p><label for="${column}">${column}</label></p>
+                <input type="${inputType}" id="${column}" name="${column}" ${inputAttributes} ${primaryKeys.includes(column) ? "disabled" : ""}>
+              </div>
+            `;
+          } else if (columnType.includes("enum")) {
+            const enumValues = columnType
+              .replace("enum(", "")
+              .replace(")", "")
+              .split(",");
+            inputAttributes = `value="${entity[column]}"`;
+            return `
+              <div>
+                <p><label for="${column}">${column}</label></p>
+                <select id="${column}" name="${column}" ${primaryKeys.includes(column) ? "disabled" : ""}>
+                  ${enumValues.map((value) => `<option value="${value}" ${entity[column] === value ? "selected" : ""}>${value}</option>`).join("")}
+                </select>
+              </div>
+            `;
+          } else if (columnType.includes("bool")) {
+            inputType = "checkbox";
+            inputAttributes = `value="${entity[column]}" ${entity[column] === 1 ? "checked" : ""}`;
+          }
+
+          return `
+            <div>
+              <p><label for="${column}">${column}</label></p>
+              <input type="${inputType}" id="${column}" name="${column}" value="${columnValue}" autocomplete="off" ${primaryKeys.includes(column) ? "disabled" : ""} ${inputAttributes}>
+            </div>
           `;
         })
         .join("")}

@@ -3,7 +3,7 @@ import {
   GetTableEntitiesParams,
   GetTableEntitiesQuery,
 } from "../types/openapi.js";
-import { generateTypes, tableCheck } from "../utils/db.js";
+import { getColumns, tableCheck } from "../utils/db.js";
 import { getHtmlPageTemplate } from "../utils/html.js";
 
 /**
@@ -22,7 +22,7 @@ export async function getTableEntities(
   const limit = parseInt(query.limit) || 30;
   const offset = parseInt(query.offset) || 0;
 
-  const columns = await generateTypes(knex, tableName || "table");
+  const columns = await getColumns(knex, tableName || "table");
 
   if (!columns) {
     throw new Error(`failed to get columns in '${tableName}'`);
@@ -37,8 +37,6 @@ export async function getTableEntities(
       (value) => value.Key === "PRI" || tableColumns.includes(value.Field),
     )
     .map((value) => value.Field);
-
-  console.log("primaryKeys", primaryKeys);
 
   const entities = await knex(tableName)
     .select("*")

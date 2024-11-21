@@ -3,7 +3,7 @@ import fs from "fs/promises";
 
 import knex from "../config/database.js";
 import { Config } from "../types/config.js";
-import { generateTypes } from "../utils/db.js";
+import { getColumns } from "../utils/db.js";
 
 let config: Config;
 // eslint-disable-next-line sonarjs/no-unused-collection
@@ -30,7 +30,6 @@ export function getCli() {
  *
  */
 export async function getConfig(): Promise<Config> {
-  console.log("config", config);
   if (config != null) {
     return config;
   }
@@ -60,8 +59,7 @@ export async function getConfig(): Promise<Config> {
       );
 
       for (const tableName of tablesList) {
-        console.log(tableName);
-        const columns = await generateTypes(knex, tableName);
+        const columns = await getColumns(knex, tableName);
         if (!columns) {
           continue;
         }

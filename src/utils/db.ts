@@ -17,7 +17,7 @@ interface GeneratedResultItem {
  * @param knex
  * @param tableName
  */
-export async function generateTypes(
+export async function getColumns(
   knex: Knex,
   tableName: string,
 ): Promise<GeneratedResultItem[] | undefined> {
