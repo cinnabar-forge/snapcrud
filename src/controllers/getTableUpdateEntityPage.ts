@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { getTableEntity } from "../services/getTableEntity.js";
+import { getTableUpdateEntityPage } from "../services/getTableUpdateEntityPage.js";
 import { GetTableEntityParams, GetTableEntityQuery } from "../types/openapi.js";
 
 /**
@@ -13,7 +13,10 @@ export default async function (
   res: Response<string>,
 ) {
   try {
-    const result: string = await getTableEntity(req.params, req.query);
+    const result: string = await getTableUpdateEntityPage(
+      req.params,
+      req.query,
+    );
     res.status(200).contentType("text/html").send(result);
   } catch (error) {
     console.error(error);

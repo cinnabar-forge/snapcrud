@@ -8,7 +8,7 @@ import { getHtmlPageTemplate } from "../utils/html.js";
  * @param params
  * @param query
  */
-export async function getTableEntity(
+export async function getTableUpdateEntityPage(
   params: GetTableEntityParams,
   query: GetTableEntityQuery,
 ): Promise<string> {
@@ -51,7 +51,7 @@ export async function getTableEntity(
     <p><a href="/tables/${tableName}">Back to table '${tableName}'</a></p>
   </div>
   <div>
-    <form action="/tables/${tableName}/entity?${primaryKeys.map((primaryKey) => `${primaryKey}=${encodeURIComponent(entity[primaryKey])}`).join("&")}" method="post">
+    <form action="/tables/${tableName}/update?${primaryKeys.map((primaryKey) => `${primaryKey}=${encodeURIComponent(entity[primaryKey])}`).join("&")}" method="post">
       ${visibleColumns
         .filter((column) => tableColumns.includes(column))
         .map((column) => {
@@ -96,7 +96,9 @@ export async function getTableEntity(
           } else if (columnType.includes("bool")) {
             inputType = "checkbox";
             inputAttributes = `value="${entity[column]}" ${entity[column] === 1 ? "checked" : ""}`;
-          } else {
+          }
+
+          if (!inputElement) {
             inputElement = `
               <input type="${inputType}" id="${column}" name="${column}" value="${columnValue}" autocomplete="off" ${primaryKeys.includes(column) ? "disabled" : ""} ${inputAttributes}>
             `;
@@ -104,13 +106,18 @@ export async function getTableEntity(
 
           return `
             <div>
-              <p><label for="${column}">${column}</label></p>
+              <p><label for="${column}">${column} - ${columnType}</label></p>
               ${inputElement}
             </div>
           `;
         })
         .join("")}    
       <button type="submit">Save</button>
+    </form>
+  </div>
+  <div>
+    <form action="/tables/${tableName}/delete?${primaryKeys.map((primaryKey) => `${primaryKey}=${encodeURIComponent(entity[primaryKey])}`).join("&")}" method="post">
+      <button type="submit">Delete</button>
     </form>
   </div>
   `;

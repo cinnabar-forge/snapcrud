@@ -1,3 +1,9 @@
+export interface DeleteTableEntityParams {
+  tableName?: string;
+}
+
+export type DeleteTableEntityQuery = Record<string, string>;
+
 export interface GetTableEntitiesParams {
   tableName?: string;
 }
@@ -12,6 +18,10 @@ export interface GetTableEntityParams {
 }
 
 export type GetTableEntityQuery = Record<string, string>;
+
+export interface CreateTableEntityParams {
+  tableName?: string;
+}
 
 export interface UpdateTableEntityParams {
   tableName?: string;

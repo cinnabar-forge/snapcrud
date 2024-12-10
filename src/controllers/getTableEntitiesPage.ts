@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { getTableEntities } from "../services/getTableEntities.js";
+import { getTableEntitiesPage } from "../services/getTableEntitiesPage.js";
 import {
   GetTableEntitiesParams,
   GetTableEntitiesQuery,
@@ -16,7 +16,7 @@ export default async function (
   res: Response<string>,
 ) {
   try {
-    const result: string = await getTableEntities(req.params, req.query);
+    const result: string = await getTableEntitiesPage(req.params, req.query);
     res.status(200).contentType("text/html").send(result);
   } catch (error) {
     console.error(error);

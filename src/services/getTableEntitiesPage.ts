@@ -11,7 +11,7 @@ import { getHtmlPageTemplate } from "../utils/html.js";
  * @param params
  * @param query
  */
-export async function getTableEntities(
+export async function getTableEntitiesPage(
   params: GetTableEntitiesParams,
   query: GetTableEntitiesQuery,
 ): Promise<string> {
@@ -46,6 +46,7 @@ export async function getTableEntities(
   const tableHtml = `
   <div>
     <p><a href="/">Back to tables</a></p>
+    <p><a href="/tables/${tableName}/create">Create a new entity</a></p>
   </div>
   <div class="chonk">
     <table>
@@ -62,7 +63,7 @@ export async function getTableEntities(
             <tr>
               ${visibleColumns.map((key) => `<td>${entity[key]}</td>`).join("")}
               <td>
-                <a href="/tables/${tableName}/entity?${primaryKeys.map((primaryKey) => `${primaryKey}=${encodeURIComponent(entity[primaryKey])}`).join("&")}">Edit</a>
+                <a href="/tables/${tableName}/update?${primaryKeys.map((primaryKey) => `${primaryKey}=${encodeURIComponent(entity[primaryKey])}`).join("&")}">Edit</a>
               </td>
             </tr>
           `;

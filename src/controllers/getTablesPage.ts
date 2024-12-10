@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { getTables } from "../services/getTables.js";
+import { getTablesPage } from "../services/getTablesPage.js";
 
 /**
  * Retrieve a list of available tables
@@ -12,7 +12,7 @@ export default async function (
   res: Response<string>,
 ) {
   try {
-    const result: string = await getTables();
+    const result: string = await getTablesPage();
     res.status(200).contentType("text/html").send(result);
   } catch (error) {
     console.error(error);
