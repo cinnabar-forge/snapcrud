@@ -8,6 +8,13 @@ Visit the link above to see all unreleased changes.
 
 [comment]: # (Insert new version after this line)
 
+## [0.1.1](https://github.com/cinnabar-forge/snapcrud/releases/tag/v0.1.1) — 2024-12-11
+
+- fix package.json ([c7ddd32])
+
+[c7ddd32]: https://github.com/cinnabar-forge/snapcrud/commit/c7ddd32
+
+
 ## [0.1.0](https://github.com/cinnabar-forge/snapcrud/releases/tag/v0.1.0) — 2024-12-11
 
 - add bin ([9896850])
@@ -46,4 +53,4 @@ Visit the link above to see all unreleased changes.
 [12cb521]: https://github.com/cinnabar-forge/snapcrud/commit/12cb521
 
 
-[unreleased]: https://github.com/cinnabar-forge/snapcrud/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/cinnabar-forge/snapcrud/compare/v0.1.1...HEAD

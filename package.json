@@ -1,6 +1,6 @@
 {
   "name": "snapcrud",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A web-based database editor of specified tables and columns",
   "keywords": [
     "admin",
