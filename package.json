@@ -1,16 +1,29 @@
 {
   "name": "snapcrud",
   "version": "0.0.0",
+  "description": "A web-based database editor of specified tables and columns",
+  "keywords": [
+    "admin",
+    "backend",
+    "crud",
+    "database editor",
+    "database interface",
+    "database",
+    "mysql",
+    "rapid",
+    "web"
+  ],
   "license": "ISC",
-  "bin": {
-    "snapcrud": "./bin/snapcrud.js"
-  },
   "files": [
     "bin",
     "dist"
   ],
   "type": "module",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cinnabar-forge/snapcrud.git"
+  },
   "scripts": {
     "build": "node esbuild.js",
     "build:bundle": "node esbuild.js full",
