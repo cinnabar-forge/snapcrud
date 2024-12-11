@@ -89,3 +89,42 @@ h5 {
 h6 {
   font-size: 12px;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #fff;
+    background-color: #333;
+  }
+
+  div {
+    background-color: #444;
+    border: 1px solid #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  th {
+    background-color: #555;
+  }
+
+  th,
+  td {
+    border: 1px solid #555;
+  }
+
+  a {
+    color: #66d9ef;
+  }
+
+  a:hover {
+    color: #3e8e41;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
+}
