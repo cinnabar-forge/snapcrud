@@ -21,10 +21,7 @@ export default async function (
   res: Response<string>,
 ) {
   try {
-    const result: string = await deleteTableEntity(
-      req.params,
-      req.query,
-    );
+    const result: string = await deleteTableEntity(req.params, req.query);
     res.status(200).contentType("text/html").send(result);
   } catch (error) {
     console.error(error);

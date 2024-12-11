@@ -13,9 +13,7 @@ export default async function (
   res: Response<string>,
 ) {
   try {
-    const result: string = await getTableCreateEntityPage(
-      req.params,
-    );
+    const result: string = await getTableCreateEntityPage(req.params);
     res.status(200).contentType("text/html").send(result);
   } catch (error) {
     console.error(error);

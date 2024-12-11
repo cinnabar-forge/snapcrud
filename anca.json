@@ -1,4 +1,31 @@
 {
+  "cinnabarMeta": {
+    "dataVersion": 0,
+    "version": {
+      "latest": "0.0.0",
+      "timestamp": 0
+    },
+    "files": [
+      {
+        "path": "./package.json",
+        "type": "nodejs-package-json"
+      },
+      {
+        "path": "./package-lock.json",
+        "type": "nodejs-package-lock-json"
+      },
+      {
+        "path": "./src/cinnabar.ts",
+        "type": "typescript",
+        "updateBuild": true
+      }
+    ],
+    "repo": {
+      "type": "github",
+      "value": "cinnabar-forge/snapcrud"
+    },
+    "updateChangelog": true
+  },
   "development": {
     "nodejsOpenapi": {
       "modelsLocation": "./src/types/openapi.ts",

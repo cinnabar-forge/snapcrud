@@ -22,9 +22,7 @@ export async function deleteTableEntity(
   }
 
   try {
-    const deletedRows = await knex(tableName)
-      .where(primaryKeys)
-      .del();
+    const deletedRows = await knex(tableName).where(primaryKeys).del();
 
     if (deletedRows === 0) {
       throw new Error("No rows deleted");
